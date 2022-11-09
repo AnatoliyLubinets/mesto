@@ -1,0 +1,10 @@
+.elements__heart {
+  width: 22px;
+  height: 19px;
+  margin: 5px 1px 0 auto;
+  transition: 0.5s;
+}
+
+.elements__heart:hover {
+  opacity: 0.5;
+}

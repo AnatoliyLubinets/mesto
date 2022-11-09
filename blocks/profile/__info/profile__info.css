@@ -1,0 +1,9 @@
+.profile__info {
+  box-sizing: content-box;
+  max-width: 336px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}

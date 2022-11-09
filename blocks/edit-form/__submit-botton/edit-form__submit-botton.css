@@ -1,0 +1,10 @@
+.edit-form__submit-botton {
+  width: 358px;
+  height: 50px;
+  margin: 18px 36px 37px 36px;
+  transition: 0.5s;
+}
+
+.edit-form__submit-botton:hover {
+  opacity: .8;
+}

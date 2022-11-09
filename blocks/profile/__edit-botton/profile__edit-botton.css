@@ -1,0 +1,11 @@
+.profile__edit-botton {
+  width: 24px;
+  height: 24px;
+  align-self: flex-end;
+  padding: 15px 0 16px 18px;
+  transition: 0.5s;
+}
+
+.profile__edit-botton:hover {
+  opacity: 0.5;
+}

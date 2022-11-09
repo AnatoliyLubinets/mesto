@@ -1,0 +1,11 @@
+.profile__add-botton {
+  width: 150px;
+  height: 50px;
+  margin-right: 0;
+  margin-left: auto;
+  transition: 0.5s;
+}
+
+.profile__add-botton:hover {
+  opacity: 0.5;
+}

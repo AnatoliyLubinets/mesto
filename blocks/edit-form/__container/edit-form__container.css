@@ -1,0 +1,12 @@
+.edit-form__container {
+  background-color: #fff;
+  max-width: 430px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 195px;
+  left: 425px;
+  right: 425px;
+  border-radius: 10px;
+  z-index: 1;
+}

@@ -1,0 +1,7 @@
+.header {
+  display: flex;
+  max-width: 100%;
+  margin: 45px 200px 20px 200px;
+  justify-content: flex-start;
+  border-bottom: solid 1px #545454;
+}
