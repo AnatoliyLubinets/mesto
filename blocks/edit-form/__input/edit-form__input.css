@@ -12,3 +12,10 @@
   outline-color:cornflowerblue;
 }
 
+@media screen and (max-width: 1200px) {
+  .edit-form__input {
+    width: 238px;
+    margin: 0 22px 30px 22px;
+  }
+}
+

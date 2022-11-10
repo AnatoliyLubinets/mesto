@@ -8,3 +8,11 @@
 .edit-form__submit-botton:hover {
   opacity: .8;
 }
+
+@media screen and (max-width: 1200px) {
+  .edit-form__submit-botton {
+    width: 238px;
+    height: 46px;
+    margin: 0 22px 25px 22px;
+  }
+}

@@ -5,3 +5,16 @@
   justify-content: flex-start;
   border-bottom: solid 1px #545454;
 }
+
+@media screen and (max-width: 1200px) {
+  .header {
+    justify-content: center;
+    margin: 28px 0 42px 0;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .header {
+    justify-content: flex-start;
+  }
+}

@@ -1,12 +1,15 @@
 .edit-form__container {
   background-color: #fff;
   max-width: 430px;
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
-  top: 195px;
-  left: 425px;
-  right: 425px;
   border-radius: 10px;
-  z-index: 1;
+}
+
+@media screen and (max-width: 1200px) {
+  .edit-form__container {
+    margin-top: 245px;
+    max-width: 282px;
+  }
 }

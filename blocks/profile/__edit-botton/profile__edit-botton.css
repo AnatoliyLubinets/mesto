@@ -9,3 +9,11 @@
 .profile__edit-botton:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 1200px) {
+  .profile__edit-botton {
+    width: 18px;
+    height: 18px;
+    padding: 8px 0px 14px 11px;
+  }
+}

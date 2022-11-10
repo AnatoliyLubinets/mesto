@@ -8,3 +8,13 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@media screen and (max-width: 1200px) {
+  .profile__about-me{
+    text-align: center;
+    font-size: 14px;
+    line-height: 16.94px;
+    margin-top: 0;
+    margin-bottom: 36px;
+  }
+}

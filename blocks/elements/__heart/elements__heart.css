@@ -3,8 +3,16 @@
   height: 19px;
   margin: 5px 1px 0 auto;
   transition: 0.5s;
+  background-image: url(../../../images/heart.png);
+  background-repeat: no-repeat;
+  border-style: none;
+  background-color: #fff;
 }
 
 .elements__heart:hover {
   opacity: 0.5;
+}
+
+.elements__heart:active {
+  background-image: url(../../../images/mask.png);
 }

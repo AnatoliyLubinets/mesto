@@ -1,4 +1,8 @@
 .profile__add-botton {
+  background-image: url(../../../images/Add\ Button.svg);
+  background-repeat: no-repeat;
+  background-color: black;
+  border-style: none;
   width: 150px;
   height: 50px;
   margin-right: 0;
@@ -8,4 +12,15 @@
 
 .profile__add-botton:hover {
   opacity: 0.5;
+}
+
+@media screen and (max-width: 1200px) {
+  .profile__add-botton {
+    padding: 0;
+    background-image: url(../../../images/Add\ Button.png);
+    background-repeat: no-repeat;
+    background-color: black;
+    width: 282px;
+    margin: 0 auto;
+  }
 }
