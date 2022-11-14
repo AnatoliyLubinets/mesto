@@ -1,3 +1,5 @@
+//Обьявим переменные
+
 const editForm = document.querySelector('.edit-form');
 const profile = document.querySelector('.profile');
 
@@ -10,14 +12,19 @@ const editButton = profile.querySelector('.profile__edit-button');
 let profileName = profile.querySelector('.profile__name');
 let aboutMe = profile.querySelector('.profile__about-me');
 
+//Открытие формы
 
 const openEditForm = function() {
   editForm.classList.add('edit-form_opened');
 }
 
+//Закрытие формы
+
 const closeEditForm = function() {
   editForm.classList.remove('edit-form_opened');
 }
+
+//Закрытие формы по клику не в форме
 
 const closeEditFormByClickOnOverlay = function(event) {
   console.log(event.target, event.currentTarget);
@@ -26,12 +33,16 @@ const closeEditFormByClickOnOverlay = function(event) {
   }
 }
 
+//Перезапись имени и профессии, закрытие формы
+
 const SubmitForm = function(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
   closeEditForm();
 }
+
+//Слушатели событий
 
 editForm.addEventListener('submit', SubmitForm);
 editButton.addEventListener('click', openEditForm);
