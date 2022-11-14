@@ -17,13 +17,13 @@
     </header>
 
     <section class="edit-form">
-      <div class="edit-form__container">
+      <form class="edit-form__container">
         <h2 class="edit-form__title">Редактировать профиль</h2>
-        <input class="edit-form__input" type="text">
-        <input class="edit-form__input" type="text">
-        <img class="edit-form__submit-botton" src="./images/Submit Button.svg" alt="кнопка сохранения">
-        <img class="edit-form__close-botton" src="./images/Close Icon.svg" alt="кнопка закрыть">
-      </div>
+        <input class="edit-form__input edit-form__input_name" type="text" value="Жак-Ив Кусто">
+        <input class="edit-form__input edit-form__input_about-me" type="text" value="Исследователь океана">
+        <button class="edit-form__submit-button" type="submit" alt="кнопка сохранения"></button>
+        <button class="edit-form__close-button" alt="кнопка закрыть"></button>
+      </form>
     </section>
 
     <main class="content">
@@ -31,10 +31,10 @@
         <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватарка">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <img class="profile__edit-botton" src="./images/Edit Button.svg" alt="Кнопка редактирования">
+          <button class="profile__edit-button" alt="Кнопка редактирования"></button>
           <p class="profile__about-me">Исследователь океана</p>
         </div>
-        <button class="profile__add-botton"></button>
+        <button class="profile__add-button"></button>
       </section>
 
       <section class="elements">
@@ -94,7 +94,7 @@
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <script src="./pages/script.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 
 </html>
