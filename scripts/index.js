@@ -1,12 +1,11 @@
 //Обьявим переменные
 
-const editForm = document.querySelector('.edit-form');
+const popup = document.querySelector('.popup');
 const profile = document.querySelector('.profile');
 
-const closeButton = editForm.querySelector('.edit-form__close-button');
-const submitButton = editForm.querySelector('.edit-form__submit-button');
-let nameInput = editForm.querySelector('.edit-form__input_name');
-let aboutMeInput = editForm.querySelector('.edit-form__input_about-me');
+const closeButton = popup.querySelector('.popup__close-button');
+let nameInput = popup.querySelector('.popup__input_description_name');
+let aboutMeInput = popup.querySelector('.popup__input_description_about-me');
 
 const editButton = profile.querySelector('.profile__edit-button');
 let profileName = profile.querySelector('.profile__name');
@@ -14,37 +13,41 @@ let aboutMe = profile.querySelector('.profile__about-me');
 
 //Открытие формы
 
-const openEditForm = function() {
-  editForm.classList.add('edit-form_opened');
+const openPopup = function() {
+  popup.classList.add('popup_opened');
+if (nameInput.value, aboutMeInput.value === "") {
+  nameInput.value = profileName.textContent;
+  aboutMeInput.value = aboutMe.textContent;
+  }
 }
 
 //Закрытие формы
 
-const closeEditForm = function() {
-  editForm.classList.remove('edit-form_opened');
+const closePopup = function() {
+  popup.classList.remove('popup_opened');
 }
 
 //Закрытие формы по клику не в форме
 
-const closeEditFormByClickOnOverlay = function(event) {
-  console.log(event.target, event.currentTarget);
-  if (event.taget === event.currentTarget) {
-    closeEditForm();
-  }
-}
+//const closeEditFormByClickOnOverlay = function(event) {
+//  console.log(event.target, event.currentTarget);
+//  if (event.taget === event.currentTarget) {
+//    closeEditForm();
+//  }
+//}
 
 //Перезапись имени и профессии, закрытие формы
 
-const SubmitForm = function(evt) {
+const submitForm = function(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
-  closeEditForm();
+  closePopup();
 }
 
 //Слушатели событий
 
-editForm.addEventListener('submit', SubmitForm);
-editButton.addEventListener('click', openEditForm);
-closeButton.addEventListener('click', closeEditForm);
-editForm.addEventListener('click', closeEditFormByClickOnOverlay);
+popup.addEventListener('submit', submitForm);
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
+//editForm.addEventListener('click', closeEditFormByClickOnOverlay);

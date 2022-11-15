@@ -1,7 +1,11 @@
 .elements__group {
+  box-sizing: border-box;
   width: 246px;
-  margin: 0;
   display: flex;
   flex-direction: row;
-  padding: 25px 15px 31px 21px;
+  justify-content: space-between;
+  margin: 22px 15px 31px 21px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

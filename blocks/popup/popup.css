@@ -1,17 +1,11 @@
-.edit-form {
+.popup {
   display: none;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   background: rgba(0,0,0,0.5);
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-}
-
-@media screen and (max-width: 1200px) {
-  .edit-form {
-    align-items: flex-start;
-  }
 }

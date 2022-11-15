@@ -5,19 +5,19 @@
   border-style: none;
   width: 150px;
   height: 50px;
-  margin-right: 0;
-  margin-left: auto;
+  margin: 35px 0 35px auto;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 1200px) {
   .profile__add-button {
     padding: 0;
-    background-image: url(../../../images/Add\ Button.png);
+    background-image: url(../../../images/Add\ Button320px.svg);
     background-repeat: no-repeat;
     background-color: black;
     width: 282px;

@@ -1,15 +1,15 @@
-.edit-form__container {
+.popup__container {
   background-color: #fff;
   max-width: 430px;
   position: relative;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
 }
 
 @media screen and (max-width: 1200px) {
-  .edit-form__container {
-    margin-top: 245px;
+  .popup__container {
     max-width: 282px;
   }
 }

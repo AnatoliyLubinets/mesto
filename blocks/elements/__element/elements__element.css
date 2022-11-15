@@ -1,4 +1,6 @@
 .elements__element {
+  box-sizing: border-box;
+  height: 362px;
   max-width: 282px;
   background-color: #fff;
   border-radius: 10px;

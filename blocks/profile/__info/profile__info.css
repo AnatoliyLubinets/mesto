@@ -3,9 +3,12 @@
   max-width: 336px;
   display: flex;
   flex-direction: row;
-  padding-left: 30px;
+  padding: 22px 0 22px 30px;
   align-items: flex-start;
   flex-wrap: wrap;
+  text-overflow: ellipsis;
+  text-overflow: hidden;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 1200px) {
