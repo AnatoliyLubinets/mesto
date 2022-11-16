@@ -3,6 +3,7 @@
 const popup = document.querySelector('.popup');
 const profile = document.querySelector('.profile');
 
+const formOfSubmit = popup.querySelector('.formOfSubmit')
 const closeButton = popup.querySelector('.popup__close-button');
 let nameInput = popup.querySelector('.popup__input_description_name');
 let aboutMeInput = popup.querySelector('.popup__input_description_about-me');
@@ -15,10 +16,8 @@ let aboutMe = profile.querySelector('.profile__about-me');
 
 const openPopup = function() {
   popup.classList.add('popup_opened');
-if (nameInput.value, aboutMeInput.value === "") {
   nameInput.value = profileName.textContent;
   aboutMeInput.value = aboutMe.textContent;
-  }
 }
 
 //Закрытие формы
@@ -26,15 +25,6 @@ if (nameInput.value, aboutMeInput.value === "") {
 const closePopup = function() {
   popup.classList.remove('popup_opened');
 }
-
-//Закрытие формы по клику не в форме
-
-//const closeEditFormByClickOnOverlay = function(event) {
-//  console.log(event.target, event.currentTarget);
-//  if (event.taget === event.currentTarget) {
-//    closeEditForm();
-//  }
-//}
 
 //Перезапись имени и профессии, закрытие формы
 
@@ -47,7 +37,7 @@ const submitForm = function(evt) {
 
 //Слушатели событий
 
-popup.addEventListener('submit', submitForm);
 editButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup);
+formOfSubmit.addEventListener('submit', submitForm);
 //editForm.addEventListener('click', closeEditFormByClickOnOverlay);
