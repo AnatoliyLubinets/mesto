@@ -3,7 +3,7 @@
 const popup = document.querySelector('.popup');
 const profile = document.querySelector('.profile');
 
-const formOfSubmit = popup.querySelector('.formOfSubmit')
+const formOfSubmit = popup.querySelector('.popup__submit-form')
 const closeButton = popup.querySelector('.popup__close-button');
 let nameInput = popup.querySelector('.popup__input_description_name');
 let aboutMeInput = popup.querySelector('.popup__input_description_about-me');
