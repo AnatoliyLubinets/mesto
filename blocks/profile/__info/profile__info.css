@@ -13,10 +13,9 @@
 
 @media screen and (max-width: 1200px) {
   .profile__info {
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     max-width: 282px;
     padding: 0;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
   }
 }
