@@ -1,4 +1,5 @@
-.elements__element {
+.elements__item {
+  position: relative;
   box-sizing: border-box;
   max-width: 282px;
   background-color: #fff;

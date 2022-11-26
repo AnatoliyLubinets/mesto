@@ -28,56 +28,63 @@
       </section>
 
       <section class="elements">
-        <article class="elements__element">
+
+        <div class="elements__item">
+          <button class="elements__delete" type="button" aria-label="Удалить"></button>
           <img class="elements__photo" src="./images/karachaevsk.jpg" alt="Фото Карачаевск">
           <div class="elements__group">
             <h2 class="elements__name">Карачаевск</h2>
             <button class="elements__heart" type="button" aria-label="Нравится"></button>
           </div>
-        </article>
+        </div>
 
-        <article class="elements__element">
+        <div class="elements__item">
+          <button class="elements__delete" type="button" aria-label="Удалить"></button>
           <img class="elements__photo" src="./images/elbrus.jpg" alt="Фото Гора Эльбрус">
           <div class="elements__group">
             <h2 class="elements__name">Гора Эльбрус</h2>
             <button class="elements__heart" type="button" aria-label="Нравится"></button>
           </div>
-        </article>
+        </div>
 
-        <article class="elements__element">
+        <div class="elements__item">
+          <button class="elements__delete" type="button" aria-label="Удалить"></button>
           <img class="elements__photo" src="./images/dombai.jpg" alt="Фото Домбай">
           <div class="elements__group">
             <h2 class="elements__name">Домбай</h2>
             <button class="elements__heart" type="button" aria-label="Нравится"></button>
           </div>
-        </article>
+        </div>
 
-        <article class="elements__element">
+        <div class="elements__item">
+          <button class="elements__delete" type="button" aria-label="Удалить"></button>
           <img class="elements__photo" src="./images/elbrus.jpg" alt="Фото Гора Эльбрус">
           <div class="elements__group">
             <h2 class="elements__name">Гора Эльбрус</h2>
             <button class="elements__heart" type="button" aria-label="Нравится"></button>
           </div>
-        </article>
+        </div>
 
-        <article class="elements__element">
+        <div class="elements__item">
+          <button class="elements__delete" type="button" aria-label="Удалить"></button>
           <img class="elements__photo" src="./images/dombai.jpg" alt="Фото Домбай">
           <div class="elements__group">
             <h2 class="elements__name">Домбай</h2>
             <button class="elements__heart" type="button" aria-label="Нравится"></button>
           </div>
-        </article>
+        </div>
 
-        <article class="elements__element">
+        <div class="elements__item">
+          <button class="elements__delete" type="button" aria-label="Удалить"></button>
           <img class="elements__photo" src="./images/karachaevsk.jpg" alt="Фото Карачаевск">
           <div class="elements__group">
             <h2 class="elements__name">Карачаевск</h2>
             <button class="elements__heart" type="button" aria-label="Нравится"></button>
           </div>
-        </article>
+        </div>
       </section>
 
-      <div class="popup">
+      <div class="popup ">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
           <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
@@ -89,11 +96,43 @@
         </div>
       </div>
 
+      <div class="add-popup">
+        <div class="add-popup__container">
+          <h2 class="add-popup__title">Новое место</h2>
+          <button class="add-popup__close-button" type="button" aria-label="Закрыть"></button>
+          <form class="add-popup__submit-form" name="form">
+            <input class="add-popup__input add-popup__input_description_name" type="text" placeholder="Название" value="" name="name">
+            <input class="add-popup__input add-popup__input_description_link" type="text" placeholder="Ссылка на картинку" value="" name="link">
+            <button class="add-popup__submit-button" type="submit">Создать</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="image-popup">
+        <div class="image-popup__container">
+          <img class="image-popup__img" src="/images/elbrus.jpg" alt="">
+          <p class="image-popup__title">Эльбрус</p>
+          <button class="image-popup__close-button" type="button" aria-label="Закрыть"></button>
+        </div>
+      </div>
+
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <script src="./scripts/index.js"></script>
+
+    <template id="elements-template">
+      <div class="elements__item">
+        <button class="elements__delete" type="button" aria-label="Удалить"></button>
+        <img class="elements__photo" src="" alt="">
+        <div class="elements__group">
+          <h2 class="elements__name"></h2>
+          <button class="elements__heart" type="button" aria-label="Нравится"></button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./scripts/index.js" type="module"></script>
   </body>
 
 </html>

@@ -1,0 +1,19 @@
+.image-popup__container {
+  width: 816px;
+  box-sizing: border-box;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .image-popup__container{
+    width: 240px;
+    height: 299px;
+  }
+}
+

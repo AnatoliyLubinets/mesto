@@ -14,7 +14,3 @@
 .elements__heart:hover {
   opacity: 0.5;
 }
-
-.elements__heart:active {
-  background-image: url(../../../images/mask.svg);
-}
