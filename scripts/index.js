@@ -33,8 +33,6 @@ let profileName = profile.querySelector('.profile__name');
 let aboutMe = profile.querySelector('.profile__about-me');
 
 
-//Добавление карточки
-
 
 //Открытие формы
 
@@ -124,6 +122,7 @@ photoCards.forEach(item => {
   elementsList.prepend(createElement(item))
 });
 
+//Добавление карточки
 
 function createElement(item) {
       const elm = elementsTemplate.cloneNode(true);
