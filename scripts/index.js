@@ -1,83 +1,64 @@
 import photoCards from './data.js'
 
-
 const elementsTemplate = document.querySelector('#elements-template').content.querySelector('.elements__item');
 const elementsList = document.querySelector('#elements-list');
 
-const imagePopupCloseButton = document.querySelector('.image-popup__close-button');
+const profile = document.querySelector('.profile');
+const imagePopup = document.querySelector('.image-popup');
+const imagePopupImg = imagePopup.querySelector('.image-popup__img');
+const imagePopupTitle = imagePopup.querySelector('.image-popup__title');
 
+
+const formOfSubmit = document.querySelector('.popup__submit-form');
+const nameInput = document.querySelector('.popup__input_description_name');
+const aboutMeInput = document.querySelector('.popup__input_description_about-me');
+const сloseButton = document.querySelectorAll('.popup__close-button');
 
 // const elementsImage = document.querySelectorAll('.elements__photo');
 // const deleteElement = document.querySelectorAll('.elements__delete');
 // const like = document.querySelectorAll('.elements__heart');
 
-const imagePopup = document.querySelector('.image-popup');
-const addPopup = document.querySelector('.add-popup');
-const popup = document.querySelector('.popup');
-const profile = document.querySelector('.profile');
-
-const formOfSubmit = popup.querySelector('.popup__submit-form');
-const closeButton = popup.querySelector('.popup__close-button');
-let nameInput = popup.querySelector('.popup__input_description_name');
-let aboutMeInput = popup.querySelector('.popup__input_description_about-me');
-
-const addFormOfSubmit = addPopup.querySelector('.add-popup__submit-form');
-const addCloseButton = addPopup.querySelector('.add-popup__close-button');
-
-let addNameInput = addPopup.querySelector('.add-popup__input_description_name');
-let addLink = addPopup.querySelector('.add-popup__input_description_link');
-
+const addFormOfSubmit = document.querySelector('.add-popup__submit-form');
+const addNameInput = document.querySelector('.add-popup__input_description_name');
+const addLink = document.querySelector('.add-popup__input_description_link');
 const addButton = profile.querySelector('.profile__add-button');
 const editButton = profile.querySelector('.profile__edit-button');
-let profileName = profile.querySelector('.profile__name');
-let aboutMe = profile.querySelector('.profile__about-me');
+const profileName = profile.querySelector('.profile__name');
+const aboutMe = profile.querySelector('.profile__about-me');
 
 
 
-//Открытие формы
+//Открытие попапа
 
-const openImagePopup = function(evt) {
-  imagePopup.querySelector('.image-popup__img').src = evt.target.src;
-  imagePopup.querySelector('.image-popup__title').textContent = evt.target.parentElement.querySelector('.elements__name').textContent;
-  imagePopup.classList.add('image-popup_opened');
-}
-
-const openAddPopup = function() {
-addPopup.classList.add('add-popup_opened');
-addNameInput.value = '';
-addLink.value = '';
-}
-
-const openPopup = function() {
+const openPopup = function(evt, elm) {
+  const popup = document.querySelector(elm);
+  if (elm === '.profile-popup') {
+    nameInput.value = profileName.textContent;
+    aboutMeInput.value = aboutMe.textContent;
+  } else if (elm === '.image-popup') {
+    imagePopupImg.src = evt.target.src;
+    imagePopupTitle.textContent = evt.target.parentElement.querySelector('.elements__name').textContent;
+  }
   popup.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  aboutMeInput.value = aboutMe.textContent;
 }
 
-//Закрытие формы
-
-const closeImagePopup = function() {
-  imagePopup.classList.remove('image-popup_opened');
-}
-
-const closeAddPopup = function() {
-  addPopup.classList.remove('add-popup_opened');
-
-}
+//Закрытие попапа
 
 const closePopup = function() {
+  const popup = document.querySelector('.popup.popup_opened');
   popup.classList.remove('popup_opened');
-
 }
 
 //Отправка формы
-const addSubmitForm = function(evt) {
+const handleAddSubmitForm = function(evt) {
   evt.preventDefault();
   elementsList.prepend(createElement({name: addNameInput.value, link: addLink.value}));
-  closeAddPopup();
+  addNameInput.value = '';
+  addLink.value = '';
+  closePopup();
 }
 
-const submitForm = function(evt) {
+const handleProfileFormSubmit = function(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
@@ -85,29 +66,26 @@ const submitForm = function(evt) {
 }
 
 //Лайки карточек
-
-const likeHeart = function(evt) {
+const toggleLike = function(evt) {
   evt.target.classList.toggle('elements__heart_active');
 }
 
 //Удаление карточки
-
 const deleteCard = function(evt) {
   evt.target.closest('.elements__item').remove();
 }
 
-
-
 //Слушатели событий
-imagePopupCloseButton.addEventListener('click', closeImagePopup);
+сloseButton.forEach(item => {
+item.addEventListener('click', closePopup);
+});
 
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
-formOfSubmit.addEventListener('submit', submitForm);
+addButton.addEventListener('click',(e) => openPopup(e, '.add-popup') );
+editButton.addEventListener('click', (e) => openPopup(e, '.profile-popup'));
+formOfSubmit.addEventListener('submit', handleProfileFormSubmit);
+addFormOfSubmit.addEventListener('submit', handleAddSubmitForm);
 
-addFormOfSubmit.addEventListener('submit', addSubmitForm);
-addButton.addEventListener('click', openAddPopup);
-addCloseButton.addEventListener('click', closeAddPopup);
+
 
 // like.forEach(item =>
 //   item.addEventListener('click', likeHeart));
@@ -125,18 +103,17 @@ photoCards.forEach(item => {
 //Добавление карточки
 
 function createElement(item) {
-      const elm = elementsTemplate.cloneNode(true);
+  const elm = elementsTemplate.cloneNode(true);
+  elm.querySelector('.elements__name').textContent = item.name;
+  const elmPhoto = elm.querySelector('.elements__photo');
+  elmPhoto.src = item.link;
+  elmPhoto.alt = item.name;
+  const elmDeleteButton = elm.querySelector('.elements__delete');
+  const elmLikeButton = elm.querySelector('.elements__heart');
+  const elmСardImage  = elm.querySelector('.elements__photo');
+  elmDeleteButton.addEventListener('click', deleteCard);
+  elmСardImage.addEventListener('click', (e) => openPopup(e, '.image-popup'));
+  elmLikeButton.addEventListener('click', toggleLike);
 
-      elm.querySelector('.elements__name').textContent = item.name;
-      elm.querySelector('.elements__photo').src = item.link;
-      const elmDeleteButton = elm.querySelector('.elements__delete');
-      const elmLikeButton = elm.querySelector('.elements__heart');
-      const elmImagePopup = elm.querySelector('.elements__photo');
-      elmDeleteButton.addEventListener('click', deleteCard);
-      elmImagePopup.addEventListener('click', openImagePopup);
-      elmLikeButton.addEventListener('click', likeHeart);
-
-      return elm;
-
-
-  }
+  return elm;
+}

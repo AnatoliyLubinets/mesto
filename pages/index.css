@@ -40,21 +40,17 @@
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 
 /* add-popup */
-@import url(../blocks/add-popup/add-popup.css);
-@import url(../blocks/add-popup/__close-button/add-popup__close-button.css);
 @import url(../blocks/add-popup/__container/add-popup__container.css);
 @import url(../blocks/add-popup/__input/add-popup__input.css);
 @import url(../blocks/add-popup/__submit-button/add-popup__submit-button.css);
 @import url(../blocks/add-popup/__title/add-popup__title.css);
-@import url(../blocks/add-popup/_opened/add-popup_opened.css);
+
 
 /* image-popup */
-@import url(../blocks/image-popup/image-popup.css);
-@import url(../blocks/image-popup/__close-button/image-popup__close-button.css);
 @import url(../blocks/image-popup/__container/image-popup__container.css);
 @import url(../blocks/image-popup/__img/image-popup__img.css);
 @import url(../blocks/image-popup/__title/image-popup__title.css);
-@import url(../blocks/image-popup/_opened/image-popup_opened.css);
+
 
 /* like */
 @import url(../blocks/elements/__heart/_active/elements__heart_active.css);
