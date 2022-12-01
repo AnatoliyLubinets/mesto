@@ -4,6 +4,8 @@ const elementsTemplate = document.querySelector("#elements-template").content.qu
 const elementsList = document.querySelector("#elements-list");
 const profile = document.querySelector(".profile");
 const imagePopup = document.querySelector(".image-popup");
+const addPopup = document.querySelector(".add-popup");
+const profilePopup = document.querySelector(".profile-popup");
 const imagePopupImg = imagePopup.querySelector(".image-popup__img");
 const imagePopupTitle = imagePopup.querySelector(".image-popup__title");
 const сloseButton = document.querySelectorAll(".popup__close-button");
@@ -20,8 +22,7 @@ const aboutMe = profile.querySelector(".profile__about-me");
 
 //Открытие попапа
 
-const openPopup = function (evt, elm) {
-  const popup = document.querySelector(elm);
+const openPopup = function (popup) {
   popup.classList.add("popup_opened");
 };
 
@@ -69,11 +70,12 @@ const deleteCard = function (evt) {
   item.addEventListener("click", closePopup);
 });
 
-addButton.addEventListener("click", (e) => openPopup(e, ".add-popup"));
-editButton.addEventListener("click", (e) => openPopup(e, ".profile-popup",
-  nameInput.value = profileName.textContent,
-  aboutMeInput.value = aboutMe.textContent
-  ));
+addButton.addEventListener("click", () => openPopup(addPopup));
+editButton.addEventListener("click", () => {
+  openPopup(profilePopup);
+  nameInput.value = profileName.textContent;
+  aboutMeInput.value = aboutMe.textContent;
+});
 formOfSubmit.addEventListener("submit", handleProfileFormSubmit);
 addFormOfSubmit.addEventListener("submit", handleAddSubmitForm);
 
@@ -92,11 +94,12 @@ function createElement(item, evt) {
   const elmDeleteButton = elm.querySelector(".elements__delete");
   const elmLikeButton = elm.querySelector(".elements__heart");
   elmDeleteButton.addEventListener("click", deleteCard);
-  elmPhoto.addEventListener("click", (e) => openPopup(e, ".image-popup",
-    imagePopupImg.src = item.link,
-    imagePopupImg.alt = "Фото" + " " + item.name,
-    imagePopupTitle.textContent = item.name
-    ));
+  elmPhoto.addEventListener("click", (e) => {
+    openPopup(imagePopup);
+    imagePopupImg.src = item.link;
+    imagePopupImg.alt = "Фото" + " " + item.name;
+    imagePopupTitle.textContent = item.name;
+  });
   elmLikeButton.addEventListener("click", toggleLike);
 
   return elm;
