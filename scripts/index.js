@@ -31,7 +31,7 @@ const closePopupByEsc = (evt) => {
 
 //Закрытие попапа по оверлею
 const closePopupClickOnOverlay = (evt) => {
-  if (evt.taget === evt.currentTarget) {
+  if (evt.target === evt.currentTarget) {
     const popup = document.querySelector(".popup.popup_opened");
     closePopup(popup);
   }
@@ -42,7 +42,7 @@ const closePopupClickOnOverlay = (evt) => {
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closePopupByEsc)
-  document.addEventListener('click', closePopupClickOnOverlay);
+  popup.addEventListener('click', closePopupClickOnOverlay);
 };
 
 //Закрытие попапа
@@ -51,7 +51,7 @@ const closePopup = function () {
   const popup = document.querySelector(".popup.popup_opened");
   popup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEsc)
-  document.removeEventListener('click', closePopupClickOnOverlay);
+  popup.removeEventListener('click', closePopupClickOnOverlay);
 };
 
 
