@@ -20,10 +20,28 @@ const editButton = profile.querySelector(".profile__edit-button");
 const profileName = profile.querySelector(".profile__name");
 const aboutMe = profile.querySelector(".profile__about-me");
 
+//Закрытие попапа на ESC
+
+const closePopupByEsc = (evt) => {
+  if(evt.key === 'Escape') {
+    const popup = document.querySelector(".popup.popup_opened");
+    closePopup(popup);
+  }
+}
+
+//Закрытие попапа по оверлею
+const closePopupClickOnOverlay = (evt) => {
+  if (evt.taget === evt.currentTarget) {
+    const popup = document.querySelector(".popup.popup_opened");
+    closePopup(popup);
+  }
+}
+
 //Открытие попапа
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener('keydown', closePopupByEsc)
 };
 
 //Закрытие попапа
@@ -31,7 +49,10 @@ const openPopup = function (popup) {
 const closePopup = function () {
   const popup = document.querySelector(".popup.popup_opened");
   popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closePopupByEsc)
+  document.addEventListener('click', closePopupClickOnOverlay);
 };
+
 
 //Отправка формы
 
