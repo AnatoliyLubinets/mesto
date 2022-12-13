@@ -42,6 +42,7 @@ const closePopupClickOnOverlay = (evt) => {
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closePopupByEsc)
+  document.addEventListener('click', closePopupClickOnOverlay);
 };
 
 //Закрытие попапа
@@ -50,7 +51,7 @@ const closePopup = function () {
   const popup = document.querySelector(".popup.popup_opened");
   popup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closePopupByEsc)
-  document.addEventListener('click', closePopupClickOnOverlay);
+  document.removeEventListener('click', closePopupClickOnOverlay);
 };
 
 
