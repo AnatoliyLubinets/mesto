@@ -8,7 +8,7 @@ const addPopup = document.querySelector(".add-popup");
 const profilePopup = document.querySelector(".profile-popup");
 const imagePopupImg = imagePopup.querySelector(".image-popup__img");
 const imagePopupTitle = imagePopup.querySelector(".image-popup__title");
-const сloseButton = document.querySelectorAll(".popup__close-button");
+const сloseButtons = document.querySelectorAll(".popup__close-button");
 const formOfSubmit = document.querySelector(".popup__submit-form");
 const nameInput = document.querySelector(".popup__input_description_name");
 const aboutMeInput = document.querySelector(".popup__input_description_about-me");
@@ -19,12 +19,13 @@ const addButton = profile.querySelector(".profile__add-button");
 const editButton = profile.querySelector(".profile__edit-button");
 const profileName = profile.querySelector(".profile__name");
 const aboutMe = profile.querySelector(".profile__about-me");
+const submitButton = addPopup.querySelector(".popup__button");
 
 //Закрытие попапа на ESC
 
 const closePopupByEsc = (evt) => {
   if(evt.key === 'Escape') {
-    const popup = document.querySelector(".popup.popup_opened");
+    const popup = document.querySelector(".popup");
     closePopup(popup);
   }
 }
@@ -32,7 +33,7 @@ const closePopupByEsc = (evt) => {
 //Закрытие попапа по оверлею
 const closePopupClickOnOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector(".popup.popup_opened");
+    const popup = document.querySelector(".popup");
     closePopup(popup);
   }
 }
@@ -88,11 +89,18 @@ const deleteCard = function (evt) {
 
 //Слушатели событий
 
-сloseButton.forEach((item) => {
+сloseButtons.forEach((item) => {
   item.addEventListener("click", closePopup);
 });
 
-addButton.addEventListener("click", () => openPopup(addPopup));
+addButton.addEventListener("click", () => {
+  openPopup(addPopup)
+  if (submitButton.disabled !== 'disabled', submitButton.classList !== 'popup__submit-button_disabled') {
+    submitButton.disabled = 'disabled'
+    submitButton.classList.add("popup__submit-button_disabled")
+  }
+});
+
 editButton.addEventListener("click", () => {
   openPopup(profilePopup);
   nameInput.value = profileName.textContent;
