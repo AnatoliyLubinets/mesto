@@ -23,17 +23,15 @@ const submitButton = addPopup.querySelector(".popup__button");
 
 //Закрытие попапа на ESC
 
-const closePopupByEsc = (evt) => {
+const closePopupByEsc = (evt, popup) => {
   if(evt.key === 'Escape') {
-    const popup = document.querySelector(".popup");
     closePopup(popup);
   }
 }
 
 //Закрытие попапа по оверлею
-const closePopupClickOnOverlay = (evt) => {
+const closePopupClickOnOverlay = (evt, popup) => {
   if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector(".popup");
     closePopup(popup);
   }
 }
