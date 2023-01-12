@@ -1,4 +1,6 @@
 import photoCards from "./data.js";
+import { FormValidator } from './FormValidator.js'
+import { Card } from './card.js'
 
 const elementsTemplate = document.querySelector("#elements-template").content.querySelector(".elements__item");
 const elementsList = document.querySelector("#elements-list");
@@ -20,6 +22,38 @@ const editButton = profile.querySelector(".profile__edit-button");
 const profileName = profile.querySelector(".profile__name");
 const aboutMe = profile.querySelector(".profile__about-me");
 const submitButton = addPopup.querySelector(".popup__button");
+
+
+const selector = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+//Обьявление экземпляров валидации
+const addCardFormValidator = new FormValidator(selector, addFormOfSubmit)
+const profileFormValidator = new FormValidator(selector, formOfSubmit)
+
+//обращение к экземплярам валидации форм
+profileFormValidator.enableValidation()
+addCardFormValidator.enableValidation()
+
+const handleClickImage = (name, link) => {
+imagePopupImg.src = link;
+imagePopupImg.alt = "Фото" + " " + name;
+imagePopupTitle.textContent = name;
+openPopup(imagePopup);
+}
+
+
+const renderCard = (data, wrap) => {
+const cardElem = new Card(data, elementsTemplate, handleClickImage)
+const card = cardElem.createElement()
+wrap.prepend(card);
+}
 
 //Закрытие попапа на ESC
 
@@ -122,12 +156,14 @@ function createElement(item, evt) {
   const elmDeleteButton = elm.querySelector(".elements__delete");
   const elmLikeButton = elm.querySelector(".elements__heart");
   elmDeleteButton.addEventListener("click", deleteCard);
+
   elmPhoto.addEventListener("click", (e) => {
     openPopup(imagePopup);
     imagePopupImg.src = item.link;
     imagePopupImg.alt = "Фото" + " " + item.name;
     imagePopupTitle.textContent = item.name;
   });
+
   elmLikeButton.addEventListener("click", toggleLike);
 
   return elm;
