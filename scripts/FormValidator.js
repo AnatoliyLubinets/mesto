@@ -22,7 +22,7 @@ export class FormValidator {
       });
   }
 
-//Проверяем валидность инпутов и показываем/прячем ошибку
+  //Проверяем валидность инпутов и показываем/прячем ошибку
 
   _checkInputValid = (input) => {
     const error = this._form.querySelector(`#${(input.id)}-error`)
@@ -47,5 +47,16 @@ export class FormValidator {
       button.classList.add(this._selector.inactiveButtonClass)
       button.disabled = 'disabled'
     }
+  }
+
+  resetInputError() {
+    const inputs = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
+    console.log(inputs);
+      inputs.forEach(input => {
+        const error = this._form.querySelector(`#${(input.id)}-error`)
+        error.classList.remove(this._selector.errorClass)
+        input.classList.remove(this._selector.inputErrorClass)
+        error.textContent = " "
+      });
   }
 }
