@@ -1,25 +1,31 @@
 export class FormValidator {
-  constructor(selector, form) {
+  constructor(validationConfig, form) {
     this._form = form
-    this._selector = selector
+    this._validationConfig = validationConfig
+    this._inputs = Array.from(this._form.querySelectorAll(this._validationConfig.inputSelector));
+    this._button = this._form.querySelector(this._validationConfig.submitButtonSelector);
+    this.submitButton = document.querySelector(".popup__button");
   }
 
   //Валидация формы
 
   enableValidation() {
+    this._addEventListeners()
 
-    const inputs = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
-    const button = this._form.querySelector(this._selector.submitButtonSelector);
-      this._form.addEventListener('submit', (evt) => {
-        evt.preventDefault()
-      })
+  }
 
-      inputs.forEach((input) => {
-        input.addEventListener('input', () => {
-          this._checkInputValid(input)
-          this._disableBotton(inputs, button)
-        });
+  //Слушатели событий
+  _addEventListeners () {
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault()
+    })
+
+    this._inputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        this._checkInputValid(input)
+        this._toggleButtonState(this._inputs, this._button)
       });
+    });
   }
 
   //Проверяем валидность инпутов и показываем/прячем ошибку
@@ -27,35 +33,42 @@ export class FormValidator {
   _checkInputValid = (input) => {
     const error = this._form.querySelector(`#${(input.id)}-error`)
     if (input.validity.valid) {
-      error.classList.add(this._selector.errorClass)
-      input.classList.remove(this._selector.inputErrorClass)
+      error.classList.add(this._validationConfig.errorClass)
+      input.classList.remove(this._validationConfig.inputErrorClass)
     } else {
       error.textContent = input.validationMessage
-      error.classList.remove(this._selector.errorClass)
-      input.classList.add(this._selector.inputErrorClass)
+      error.classList.remove(this._validationConfig.errorClass)
+      input.classList.add(this._validationConfig.inputErrorClass)
     }
   }
 
   //Проверяем инпуты на валидность и включаем/выключаем кнопку
 
-  _disableBotton = (inputs, button) => {
-    const isFormValid = inputs.every(input => input.validity.valid)
+  _toggleButtonState = () => {
+    const isFormValid = this._inputs.every(input => input.validity.valid)
     if (isFormValid) {
-      button.classList.remove(this._selector.inactiveButtonClass)
-      button.disabled = ''
+      this._button.classList.remove(this._validationConfig.inactiveButtonClass)
+      this._button.disabled = ''
     } else {
-      button.classList.add(this._selector.inactiveButtonClass)
-      button.disabled = 'disabled'
+      this._button.classList.add(this._validationConfig.inactiveButtonClass)
+      this._button.disabled = 'disabled'
     }
   }
 
   resetInputError() {
-    const inputs = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
-      inputs.forEach(input => {
+      this._inputs.forEach(input => {
         const error = this._form.querySelector(`#${(input.id)}-error`)
-        error.classList.remove(this._selector.errorClass)
-        input.classList.remove(this._selector.inputErrorClass)
+        error.classList.remove(this._validationConfig.errorClass)
+        input.classList.remove(this._validationConfig.inputErrorClass)
         error.textContent = " "
       });
+  }
+
+  disableSubmitButton() {
+    if (this.submitButton.disabled !== 'disabled',
+        this.submitButton.classList !== 'popup__submit-button_disabled') {
+          this.submitButton.disabled = 'disabled'
+          this.submitButton.classList.add("popup__submit-button_disabled")
+    }
   }
 }
