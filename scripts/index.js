@@ -116,7 +116,6 @@ addButton.addEventListener("click", () => {
     submitButton.disabled = 'disabled'
     submitButton.classList.add("popup__submit-button_disabled")
   }
-  profileFormValidator.resetInputError();
   addCardFormValidator.resetInputError();
 });
 
@@ -125,7 +124,6 @@ editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   aboutMeInput.value = aboutMe.textContent;
   profileFormValidator.resetInputError();
-  addCardFormValidator.resetInputError();
 });
 
 formOfSubmit.addEventListener("submit", handleProfileFormSubmit);

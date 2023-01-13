@@ -51,7 +51,6 @@ export class FormValidator {
 
   resetInputError() {
     const inputs = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
-    console.log(inputs);
       inputs.forEach(input => {
         const error = this._form.querySelector(`#${(input.id)}-error`)
         error.classList.remove(this._selector.errorClass)
