@@ -72,13 +72,11 @@ const closePopup = function (popup) {
   сloseButton.removeEventListener('click', () => closePopup(popup));
 };
 
-
 //Отправка формы и сзодние карточки
 
 const handleAddSubmitForm = function (evt) {
   evt.preventDefault();
-  const cardElement = new Card({ name: addNameInput.value, link: addLink.value }, elementsTemplate, openPopup)
-  elementsList.prepend(cardElement.createElement());
+  elementsList.prepend(createCard({ name: addNameInput.value, link: addLink.value }));
   addNameInput.value = "";
   addLink.value = "";
   closePopup(addPopup);
@@ -110,10 +108,14 @@ editButton.addEventListener("click", () => {
   profileFormValidator.resetInputError();
 });
 
+const createCard = (item) => {
+  const cardElement = new Card(item, elementsTemplate, openPopup)
+    return cardElement.createElement();
+}
+
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 formAddCard.addEventListener("submit", handleAddSubmitForm);
 
 photoCards.forEach((item) => {
-  const cardElement = new Card(item, elementsTemplate, openPopup)
-  elementsList.prepend(cardElement.createElement());
+  elementsList.prepend(createCard(item));
 });
