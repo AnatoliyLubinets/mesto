@@ -17,7 +17,7 @@ const buttonOpenAddCardPopup = profile.querySelector(".profile__add-button");
 const buttonOpenEditProfilePopup = profile.querySelector(".profile__edit-button");
 const profileName = profile.querySelector(".profile__name");
 const aboutMe = profile.querySelector(".profile__about-me");
-
+const сloseButtons = document.querySelectorAll(".popup__close-button");
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -39,38 +39,40 @@ addCardFormValidator.enableValidation()
 
 //Закрытие попапа на ESC
 
-const closePopupByEsc = (evt, popup) => {
+const closePopupByEsc = (evt) => {
   if(evt.key === 'Escape') {
-    closePopup(popup);
+    closePopup();
   }
 }
 
+
 //Закрытие попапа по оверлею
-const closePopupClickOnOverlay = (evt, popup) => {
+const closePopupClickOnOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
-    closePopup(popup);
+    closePopup();
   }
 }
 
 //Открытие попапа
 
 const openPopup = function (popup) {
-  const сloseButton = popup.querySelector(".popup__close-button");
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown', function keydownEsc (evt) {closePopupByEsc(evt, popup)});
-  popup.addEventListener('click', function ClickOnOverlay (evt) {closePopupClickOnOverlay(evt, popup)});
-  сloseButton.addEventListener('click', function closeModal () {closePopup(popup)});
+  document.addEventListener('keydown', closePopupByEsc);
+  popup.addEventListener('click', closePopupClickOnOverlay);
 };
 
 //Закрытие попапа
 
-const closePopup = function (popup) {
-  const сloseButton = popup.querySelector(".popup__close-button");
+const closePopup = function () {
+  const popup = document.querySelector(".popup_opened");
   popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', function keydownEsc (evt) {closePopupByEsc(evt, popup)});
-  popup.removeEventListener('click', function ClickOnOverlay (evt) {closePopupClickOnOverlay(evt, popup)});
-  сloseButton.removeEventListener('click', function closeModal () {closePopup(popup)});
+  document.removeEventListener('keydown',  closePopupByEsc);
+  popup.removeEventListener('click', closePopupClickOnOverlay);
 };
+
+сloseButtons.forEach((item) => {
+  item.addEventListener("click", closePopup);
+});
 
 //Отправка формы и сзодние карточки
 
@@ -79,7 +81,7 @@ const handleAddSubmitForm = function (evt) {
   elementsList.prepend(createCard({ name: addNameInput.value, link: addLink.value }));
   addNameInput.value = "";
   addLink.value = "";
-  closePopup(addPopup);
+  closePopup();
 };
 
 
@@ -88,7 +90,7 @@ const handleProfileFormSubmit = function (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   aboutMe.textContent = aboutMeInput.value;
-  closePopup(profilePopup);
+  closePopup();
 };
 
 
