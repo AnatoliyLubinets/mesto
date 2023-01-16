@@ -13,8 +13,8 @@ const aboutMeInput = document.querySelector(".popup__input_description_about-me"
 const formAddCard = document.querySelector(".add-popup__submit-form");
 const addNameInput = document.querySelector(".add-popup__input_description_name");
 const addLink = document.querySelector(".add-popup__input_description_link");
-const addButton = profile.querySelector(".profile__add-button");
-const editButton = profile.querySelector(".profile__edit-button");
+const buttonOpenAddCardPopup = profile.querySelector(".profile__add-button");
+const buttonOpenEditProfilePopup = profile.querySelector(".profile__edit-button");
 const profileName = profile.querySelector(".profile__name");
 const aboutMe = profile.querySelector(".profile__about-me");
 
@@ -57,9 +57,9 @@ const closePopupClickOnOverlay = (evt, popup) => {
 const openPopup = function (popup) {
   const сloseButton = popup.querySelector(".popup__close-button");
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown', evt => closePopupByEsc(evt, popup));
-  popup.addEventListener('click', evt => closePopupClickOnOverlay(evt, popup));
-  сloseButton.addEventListener('click', () => closePopup(popup));
+  document.addEventListener('keydown', function keydownEsc (evt) {closePopupByEsc(evt, popup)});
+  popup.addEventListener('click', function ClickOnOverlay (evt) {closePopupClickOnOverlay(evt, popup)});
+  сloseButton.addEventListener('click', function closeModal () {closePopup(popup)});
 };
 
 //Закрытие попапа
@@ -67,9 +67,9 @@ const openPopup = function (popup) {
 const closePopup = function (popup) {
   const сloseButton = popup.querySelector(".popup__close-button");
   popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', evt => closePopupByEsc(evt, popup));
-  popup.removeEventListener('click', evt => closePopupClickOnOverlay(evt, popup));
-  сloseButton.removeEventListener('click', () => closePopup(popup));
+  document.removeEventListener('keydown', function keydownEsc (evt) {closePopupByEsc(evt, popup)});
+  popup.removeEventListener('click', function ClickOnOverlay (evt) {closePopupClickOnOverlay(evt, popup)});
+  сloseButton.removeEventListener('click', function closeModal () {closePopup(popup)});
 };
 
 //Отправка формы и сзодние карточки
@@ -94,19 +94,23 @@ const handleProfileFormSubmit = function (evt) {
 
 //Слушатели событий
 
-addButton.addEventListener("click", () => {
+//слушатель клика для отключени кнопки сабмита и сброс ошибок при открытии модалки профиля
+buttonOpenAddCardPopup.addEventListener("click", () => {
   openPopup(addPopup)
   addCardFormValidator.disableSubmitButton();
   addCardFormValidator.resetInputError();
 });
 
-editButton.addEventListener("click", () => {
+//слушатель клика для отключения кнопки сабмита и сброс ошибок при открытии модалки профиля
+buttonOpenEditProfilePopup.addEventListener("click", () => {
   openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   aboutMeInput.value = aboutMe.textContent;
   profileFormValidator.disableSubmitButton();
   profileFormValidator.resetInputError();
 });
+
+
 
 const createCard = (item) => {
   const cardElement = new Card(item, elementsTemplate, openPopup)

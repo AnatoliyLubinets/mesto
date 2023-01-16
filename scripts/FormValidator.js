@@ -55,6 +55,7 @@ export class FormValidator {
     }
   }
 
+    //сброс ошибок инпутов
   resetInputError() {
       this._inputs.forEach(input => {
         const error = this._form.querySelector(`#${(input.id)}-error`)
@@ -64,11 +65,12 @@ export class FormValidator {
       });
   }
 
+    //выключение кнопки кнопки при открытии модалки
   disableSubmitButton() {
     if (this.submitButton.disabled !== 'disabled',
-        this.submitButton.classList !== 'popup__submit-button_disabled') {
+        this.submitButton.classList !== this._validationConfig.inactiveButtonClass) {
           this.submitButton.disabled = 'disabled'
-          this.submitButton.classList.add("popup__submit-button_disabled")
+          this.submitButton.classList.add(this._validationConfig.inactiveButtonClass)
     }
   }
 }
