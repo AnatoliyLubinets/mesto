@@ -41,15 +41,17 @@ addCardFormValidator.enableValidation()
 
 const closePopupByEsc = (evt) => {
   if(evt.key === 'Escape') {
-    closePopup();
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
   }
 }
 
 
 //Закрытие попапа по оверлею
 const closePopupClickOnOverlay = (evt) => {
-  if (evt.target === evt.currentTarget) {
-    closePopup();
+  if(evt.target === evt.currentTarget) {
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
   }
 }
 
@@ -63,18 +65,20 @@ const openPopup = function (popup) {
 
 //Закрытие попапа
 
-const closePopup = function () {
-  const popup = document.querySelector(".popup_opened");
+const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener('keydown',  closePopupByEsc);
   popup.removeEventListener('click', closePopupClickOnOverlay);
 };
 
 сloseButtons.forEach((item) => {
-  item.addEventListener("click", closePopup);
+  item.addEventListener('click', () => {
+    const popup = document.querySelector(".popup_opened");
+    popup.classList.remove("popup_opened");
+  });
 });
 
-//Отправка формы и сзодние карточки
+//Отправка формы и создание карточки
 
 const handleAddSubmitForm = function (evt) {
   evt.preventDefault();
@@ -92,7 +96,6 @@ const handleProfileFormSubmit = function (evt) {
   aboutMe.textContent = aboutMeInput.value;
   closePopup();
 };
-
 
 //Слушатели событий
 
