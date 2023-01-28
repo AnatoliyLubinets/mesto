@@ -1,3 +1,4 @@
+
 export class Card {
   constructor(item, elementsTemplate, openPopup) {
     this._elementsTemplate = elementsTemplate
@@ -23,9 +24,9 @@ export class Card {
   //Отрытие картинки попапа
   _handleClickImage = () => {
     this.imagePopupImg.src = this.item.link;
-    this.imagePopupImg.alt = this.itemname;
+    this.imagePopupImg.alt = this.item.name;
     this.imagePopupTitle.textContent = this.item.name;
-    this._openPopup(this.imagePopup);
+    this._openPopup(this.item.link, this.item.name);
     }
 
   //Получение темплейт элемента
