@@ -2,7 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Проектная работа 5 Анатолия Лубинца на Яндекс.Практикуме"/>
@@ -13,12 +13,12 @@
 
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логитип в шапке">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логитип в шапке">
     </header>
 
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватарка">
+        <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватарка">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
@@ -91,7 +91,7 @@
       </div>
     </template>
 
-    <script src="./scripts/index.js" defer type="module"></script>
+    <!-- <script src="./dist/main.js" defer type="module"></script> -->
   </body>
 
 </html>

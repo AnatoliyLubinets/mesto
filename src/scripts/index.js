@@ -1,3 +1,4 @@
+import './../pages/index.css';
 import photoCards from "./data.js";
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Сard.js";
