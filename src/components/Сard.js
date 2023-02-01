@@ -1,12 +1,12 @@
 
 export class Card {
-  constructor(item, elementsTemplate, openPopup) {
+  constructor(item, elementsTemplate, handleCardClick) {
     this._elementsTemplate = elementsTemplate
     this.item = item
-    this._openPopup = openPopup
-    this.imagePopup = document.querySelector(".image-popup");
-    this.imagePopupImg = this.imagePopup.querySelector(".image-popup__img");
-    this.imagePopupTitle = this.imagePopup.querySelector(".image-popup__title");
+    this._handleCardClick = handleCardClick
+    // this.imagePopup = document.querySelector(".image-popup");
+    // this.imagePopupImg = this.imagePopup.querySelector(".image-popup__img");
+    // this.imagePopupTitle = this.imagePopup.querySelector(".image-popup__title");
 
   }
 
@@ -23,10 +23,7 @@ export class Card {
 
   //Отрытие картинки попапа
   _handleClickImage = () => {
-    this.imagePopupImg.src = this.item.link;
-    this.imagePopupImg.alt = this.item.name;
-    this.imagePopupTitle.textContent = this.item.name;
-    this._openPopup(this.item.link, this.item.name);
+    this._handleCardClick(this.item.link, this.item.name);
     }
 
   //Получение темплейт элемента

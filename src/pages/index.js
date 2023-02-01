@@ -1,22 +1,12 @@
 import './../pages/index.css';
-import photoCards from "./data.js";
-import { FormValidator } from "./FormValidator.js";
-import { Card } from "./Сard.js";
-import { Popup } from "./Popup.js";
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { UserInfo } from './UserInfo.js';
-import { Section } from './Section.js';
-
-const elementsTemplate = "#elements-template";
-const profile = document.querySelector(".profile");
-const formEditProfile = document.querySelector(".popup__submit-form");
-const formAddCard = document.querySelector(".add-popup__submit-form");
-const addNameInput = document.querySelector(".add-popup__input_description_name");
-const addLink = document.querySelector(".add-popup__input_description_link");
-const buttonOpenAddCardPopup = profile.querySelector(".profile__add-button");
-const buttonOpenEditProfilePopup = profile.querySelector(".profile__edit-button");
-
+import photoCards from "./../utils/data.js";
+import { FormValidator } from "./../components/FormValidator";
+import { Card } from "./../components/Сard.js";
+import { PopupWithForm } from "./../components/PopupWithForm.js";
+import { PopupWithImage } from "./../components/PopupWithImage.js";
+import { UserInfo } from './../components/UserInfo.js';
+import { Section } from './../components/Section.js';
+import { elementsTemplate, profile, formEditProfile, formAddCard, addNameInput, addLink, buttonOpenAddCardPopup, buttonOpenEditProfilePopup } from './../utils/constants.js';
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -35,9 +25,7 @@ const profileFormValidator = new FormValidator(validationConfig, formEditProfile
 profileFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
 
-//Экземпляр попапа
-const addCardPopup = new Popup ('.add-popup');
-addCardPopup.setEventListeners();
+
 
 
 //Экземпляр попапа с картинкой
@@ -65,11 +53,9 @@ cardList.renderItems();
 
 //Отправка формы и создание карточки
 
-const handleAddSubmitForm = function (evt) {
+const handleAddSubmitForm = function (evt, values) {
   evt.preventDefault();
-  cardList.addItem(createCard({ name: addNameInput.value, link: addLink.value }));
-  addNameInput.value = "";
-  addLink.value = "";
+  cardList.addItem(createCard(values));
   addCardPopup.close();
 };
 
@@ -83,6 +69,11 @@ const handleProfileFormSubmit = function (evt, values) {
   };
 };
 
+//Экземпляр попапа добавления карточки
+const addCardPopup = new PopupWithForm ('.add-popup', handleAddSubmitForm);
+addCardPopup.setEventListeners();
+
+
 //Экземпляр попапа с формай редактирования профиля
 const profileFormPopup = new PopupWithForm ('.profile-popup', handleProfileFormSubmit);
 profileFormPopup.setEventListeners();
@@ -92,7 +83,7 @@ profileFormPopup.setEventListeners();
 //слушатель клика для отключени кнопки сабмита и сброс ошибок при открытии модалки профиля
 buttonOpenAddCardPopup.addEventListener("click", () => {
   addCardPopup.open();
-  addCardFormValidator.disableSubmitButton();
+  addCardFormValidator.toggleButtonState();
   addCardFormValidator.resetInputError();
 });
 
@@ -100,10 +91,7 @@ buttonOpenAddCardPopup.addEventListener("click", () => {
 buttonOpenEditProfilePopup.addEventListener("click", () => {
   const { name, info } = userInfo.getUserInfo();
   profileFormPopup.setFormvalues({ name, info })
-  profileFormValidator.disableSubmitButton();
+  profileFormValidator.toggleButtonState();
   profileFormValidator.resetInputError();
   profileFormPopup.open();
 });
-
-formEditProfile.addEventListener("submit", handleProfileFormSubmit);
-formAddCard.addEventListener("submit", handleAddSubmitForm);

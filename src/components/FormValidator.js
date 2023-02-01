@@ -3,8 +3,7 @@ export class FormValidator {
     this._form = form
     this._validationConfig = validationConfig
     this._inputs = Array.from(this._form.querySelectorAll(this._validationConfig.inputSelector));
-    this._button = this._form.querySelector(this._validationConfig.submitButtonSelector);
-    this.submitButton = document.querySelector(".popup__button");
+    this.submitButton = this._form.querySelector(this._validationConfig.submitButtonSelector);
   }
 
   //Валидация формы
@@ -23,7 +22,7 @@ export class FormValidator {
     this._inputs.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValid(input)
-        this._toggleButtonState(this._inputs, this._button)
+        this.toggleButtonState(this._inputs, this._button)
       });
     });
   }
@@ -44,14 +43,14 @@ export class FormValidator {
 
   //Проверяем инпуты на валидность и включаем/выключаем кнопку
 
-  _toggleButtonState = () => {
+  toggleButtonState = () => {
     const isFormValid = this._inputs.every(input => input.validity.valid)
     if (isFormValid) {
-      this._button.classList.remove(this._validationConfig.inactiveButtonClass)
-      this._button.disabled = ''
+      this.submitButton.classList.remove(this._validationConfig.inactiveButtonClass)
+      this.submitButton.disabled = ''
     } else {
-      this._button.classList.add(this._validationConfig.inactiveButtonClass)
-      this._button.disabled = 'disabled'
+      this.submitButton.classList.add(this._validationConfig.inactiveButtonClass)
+      this.submitButton.disabled = 'disabled'
     }
   }
 
@@ -65,12 +64,4 @@ export class FormValidator {
       });
   }
 
-    //выключение кнопки кнопки при открытии модалки
-  disableSubmitButton() {
-    if (this.submitButton.disabled !== 'disabled',
-        this.submitButton.classList !== this._validationConfig.inactiveButtonClass) {
-          this.submitButton.disabled = 'disabled'
-          this.submitButton.classList.add(this._validationConfig.inactiveButtonClass)
-    }
-  }
 }
