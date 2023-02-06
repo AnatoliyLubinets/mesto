@@ -20,6 +20,7 @@
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__about-me/profile__about-me.css);
+@import url(../blocks/profile/__avatar-button/profile__avatar-button.css);
 
 /* elements */
 @import url(../blocks/elements/elements.css);
@@ -55,9 +56,19 @@
 @import url(../blocks/image-popup/__img/image-popup__img.css);
 @import url(../blocks/image-popup/__title/image-popup__title.css);
 
+/*confirmation-popup*/
+@import url(../blocks/confirmation-popup/__container/confirmation-popup__container.css);
+@import url(../blocks/confirmation-popup/__title/confirmation-popup__title.css);
+
+/*avatar-popup*/
+@import url(../blocks/avatar-popup/__container/avatar-popup__container.css);
+@import url(../blocks/avatar-popup/__title/avatar-popup__title.css);
+@import url(../blocks/avatar-popup/__input/avatar-popup__input.css);
 
 /* like */
 @import url(../blocks/elements/__heart/_active/elements__heart_active.css);
+@import url(../blocks/elements/__like-group/elements__like-group.css);
+@import url(../blocks/elements/__number-of-like/elements__number-of-like.css);
 
 /* footer */
 @import url(../blocks/footer/footer.css);

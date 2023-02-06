@@ -18,7 +18,9 @@
 
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватарка">
+        <button class="profile__avatar-button">
+          <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватарка">
+        </button>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
@@ -75,6 +77,30 @@
         </div>
       </div>
 
+      <div class="popup confirmation-popup">
+        <div class="confirmation-popup__container">
+          <h2 class="confirmation-popup__title">Вы уверены?</h2>
+          <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+          <form class="popup__form confirmation-popup__submit-form" name="form">
+            <button class="popup__button popup__submit-button" type="submit" disabled>Да</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup avatar-popup">
+        <div class="avatar-popup__container">
+          <h2 class="avatar-popup__title">Обновить аватар</h2>
+          <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+          <form class="popup__form avatar-popup__submit-form" name="form">
+            <span id="avatar-error" class="error"></span>
+            <input class="popup__input avatar-popup__input avatar-popup__input_description_link" type="url"
+              placeholder="Ссылка на картинку" value="" name="link" id="link" required>
+            <span id="link-error" class="error"></span>
+            <button class="popup__button popup__submit-button" type="submit" disabled>Сохранить</button>
+          </form>
+        </div>
+      </div>
+
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
@@ -86,7 +112,10 @@
         <img class="elements__photo">
         <div class="elements__group">
           <h2 class="elements__name"></h2>
-          <button class="elements__heart" type="button" aria-label="Нравится"></button>
+          <div class="elements__like-group">
+            <button class="elements__heart" type="button" aria-label="Нравится"></button>
+            <span id="number" class="elements__number-of-like">0</span>
+          </div>
         </div>
       </div>
     </template>
