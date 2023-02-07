@@ -4,10 +4,6 @@ export class Card {
     this._elementsTemplate = elementsTemplate
     this.item = item
     this._handleCardClick = handleCardClick
-    // this.imagePopup = document.querySelector(".image-popup");
-    // this.imagePopupImg = this.imagePopup.querySelector(".image-popup__img");
-    // this.imagePopupTitle = this.imagePopup.querySelector(".image-popup__title");
-
   }
 
   //лайк карточки

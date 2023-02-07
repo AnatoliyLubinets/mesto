@@ -4,9 +4,16 @@ import { FormValidator } from "./../components/FormValidator";
 import { Card } from "./../components/Сard.js";
 import { PopupWithForm } from "./../components/PopupWithForm.js";
 import { PopupWithImage } from "./../components/PopupWithImage.js";
+import { PopupWithConfirmation } from "./../components/PopupWithConfirmation.js";
 import { UserInfo } from './../components/UserInfo.js';
 import { Section } from './../components/Section.js';
-import { elementsTemplate, profile, formEditProfile, formAddCard, addNameInput, addLink, buttonOpenAddCardPopup, buttonOpenEditProfilePopup } from './../utils/constants.js';
+import { Api } from './../components/api.js';
+import { elementsTemplate, buttonOpenEditAvatarPopup, formEditProfile, formAddCard, buttonOpenAddCardPopup, buttonOpenEditProfilePopup, formEditAvatar, openConfirmationPopupButtons } from './../utils/constants.js';
+
+const api = new Api()
+
+Promise.all([api.getCards(), api.getUserInfo()])
+
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -20,11 +27,12 @@ const validationConfig = {
 //Обьявление экземпляров валидации
 const addCardFormValidator = new FormValidator(validationConfig, formAddCard)
 const profileFormValidator = new FormValidator(validationConfig, formEditProfile)
+const avatarFormPopupValidator = new FormValidator(validationConfig, formEditAvatar)
 
 //обращение к экземплярам валидации форм
 profileFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
-
+avatarFormPopupValidator.enableValidation()
 
 
 
@@ -69,6 +77,21 @@ const handleProfileFormSubmit = function (evt, values) {
   };
 };
 
+const handleAvatarFormSubmit = function (evt, values) {
+  evt.preventDefault();
+  if (values) {
+    avatarFormPopup.close();
+  }
+}
+
+//"Экземпляр попапа подтверждения"
+const confirmationPopup = new PopupWithConfirmation('.confirmation-popup');
+confirmationPopup.setEventListeners();
+
+//Экземпляр попапа редактирования аватара
+const avatarFormPopup = new PopupWithForm('.avatar-popup', handleAvatarFormSubmit);
+avatarFormPopup.setEventListeners();
+
 //Экземпляр попапа добавления карточки
 const addCardPopup = new PopupWithForm ('.add-popup', handleAddSubmitForm);
 addCardPopup.setEventListeners();
@@ -80,7 +103,13 @@ profileFormPopup.setEventListeners();
 
 //Слушатели событий
 
-//слушатель клика для отключени кнопки сабмита и сброс ошибок при открытии модалки профиля
+//Открытие попапа подтверждения удаления карточки
+openConfirmationPopupButtons.forEach((item) => {
+  item.addEventListener("click", confirmationPopup.open());
+});
+
+
+//слушатель клика для отключени кнопки сабмита и сброс ошибок при открытии модалки карточки
 buttonOpenAddCardPopup.addEventListener("click", () => {
   addCardPopup.open();
   addCardFormValidator.toggleButtonState();
@@ -94,4 +123,11 @@ buttonOpenEditProfilePopup.addEventListener("click", () => {
   profileFormValidator.toggleButtonState();
   profileFormValidator.resetInputError();
   profileFormPopup.open();
+});
+
+//слушатель клика для отключения кнопки сабмита и сброс ошибок при открытии модалки аватара
+buttonOpenEditAvatarPopup.addEventListener("click", () => {
+  avatarFormPopup.open();
+  avatarFormPopupValidator.toggleButtonState();
+  avatarFormPopupValidator.resetInputError();
 });
