@@ -18,12 +18,12 @@
     <main class="content">
       <section class="profile">
         <button class="profile__avatar-button">
-          <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватарка">
+          <img class="profile__avatar" src="" alt="Аватарка">
         </button>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
-          <p class="profile__about-me">Исследователь океана</p>
+          <p class="profile__about-me"></p>
         </div>
         <button class="profile__add-button" type="button" aria-label="Добавить"></button>
       </section>
@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <div class="popup confirmation-popup popup_opened">
+      <div class="popup confirmation-popup">
         <div class="confirmation-popup__container">
           <h2 class="confirmation-popup__title">Вы уверены?</h2>
           <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
@@ -107,7 +107,7 @@
 
     <template id="elements-template">
       <div class="elements__item">
-        <button class="elements__delete" type="button" aria-label="Удалить"></button>
+        <button class="elements__delete" type="button" aria-label="Удалить" id="delete"></button>
         <img class="elements__photo">
         <div class="elements__group">
           <h2 class="elements__name"></h2>

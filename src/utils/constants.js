@@ -10,4 +10,4 @@ export const buttonOpenEditProfilePopup = profile.querySelector(".profile__edit-
 export const buttonOpenEditAvatarPopup = document.querySelector(".profile__avatar-button");
 export const formEditAvatar = document.querySelector(".avatar-popup__submit-form");
 export const confirmationPopupForm = document.querySelector(".confirmation-popup__submit-form");
-export const openConfirmationPopupButtons = document.querySelectorAll(".elements__delete");
+export const openConfirmationPopupButtons = document.querySelector("#elements-template").content.querySelectorAll(".elements__delete");

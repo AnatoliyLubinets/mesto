@@ -1,113 +1,102 @@
+import { addLink } from "../utils/constants"
+
 export class Api {
 
-  getUserInfo = () => {
-    fetch('https://nomoreparties.co/v1/cohort-59/users/me', {
+  getInitialCards = () => {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
+      headers: {
+        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9'
+      },
+    })
+    .then(res => res.ok ? res.json() : Promise.reject())
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  getProfileInfo = () => {
+    return fetch('https://nomoreparties.co/v1/cohort-59/users/me', {
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9'
       }
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
-  getCards = () => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9'
-      }
-    })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
-  }
-
-  profileEdit = () => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
+  profileEdit = (values) => {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
       method: 'PATCH',
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: '',
-        about: ''
+        name: values.name,
+        about: values.info
       })
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
-  createNewCard = () => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
+  createNewCard = (values) => {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
       method: 'POST',
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify()
+      body: JSON.stringify({
+        name: values.name,
+        link: values.link
+      })
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
-  numberLike = () => {
 
-  }
-
-  handleDeleteCard = (id) => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ id, {
+  handleDeleteCard = (_id) => {
+    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ _id, {
       method: 'DELETE',
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
       },
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
-  handleLikeClick = (id) => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/likes'+ id, {
-      method: 'PUT ',
+  handleLikeClick = (_id) => {
+    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ _id +'/likes', {
+      method: 'PUT',
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify()
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
-  handleDeleteClick = (id) => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards//likes'+ id, {
+  handleDeleteLikeClick = (_id) => {
+    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ _id +'/likes', {
       method: 'DELETE',
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
       },
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
-  handleChangeAvatar = () => {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar', {
+  handleChangeAvatar = (user) => {
+    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar', {
       method: 'PATCH',
       headers: {
         authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        avatar
+        avatar: user.link,
       })
     })
-    .then(res => res.json())
-      console.log(res)
-    .catch(console.log)
+    .then(res => res.ok ? res.json() : Promise.reject())
   }
 }
