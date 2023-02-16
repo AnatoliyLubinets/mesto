@@ -7,9 +7,10 @@ import { PopupWithImage } from "./../components/PopupWithImage.js";
 import { UserInfo } from './../components/UserInfo.js';
 import { Section } from './../components/Section.js';
 import { Api } from './../components/api.js';
+import { PopupWithConfirmation } from './../components/PopupWithConfirmation.js'
 import { elementsTemplate, buttonOpenEditAvatarPopup,
   formEditProfile, formAddCard, buttonOpenAddCardPopup,
-  buttonOpenEditProfilePopup, formEditAvatar, openConfirmationPopupButtons,
+  buttonOpenEditProfilePopup, formEditAvatar,
 } from './../utils/constants.js';
 
 const api = new Api()
@@ -68,8 +69,8 @@ const createCard = (item) => {
       item, userProfile._id, elementsTemplate,
      (src, link) => {popupWithImage.open(src, link)},
      (_id, isDelete) => togglelikeCard(_id, isDelete),
-     (_id) => api.handleDeleteCard(_id),
-     () => {confirmationPopup.open(cardElement)},
+    //  (_id) => api.handleDeleteCard(_id),
+     (evt, _id) => {confirmationPopup.open(evt, _id)},
     )
     return cardElement.createElement();
 }
@@ -128,10 +129,10 @@ const handleAvatarFormSubmit = function (evt, user) {
 };
 
 //отправка формы подтвержденя
-const handleConfirmFormSubmit = function(_id, cardElement) {
+const handleConfirmFormSubmit = function(evt, _id, _elm) {
   evt.preventDefault();
-  api.handleDeleteCard(_id).then((res) => {
-    cardElement.deleteCard(res);
+  api.handleDeleteCard(_id).then(() => {
+    _elm.target.closest(".elements__item").remove();
     confirmationPopup.close();
   })
   .catch((err) => {
@@ -140,7 +141,7 @@ const handleConfirmFormSubmit = function(_id, cardElement) {
 };
 
 //"Экземпляр попапа подтверждения"
-const confirmationPopup = new PopupWithForm('.confirmation-popup', handleConfirmFormSubmit);
+const confirmationPopup = new PopupWithConfirmation('.confirmation-popup', handleConfirmFormSubmit);
 confirmationPopup.setEventListeners();
 
 //Экземпляр попапа редактирования аватара

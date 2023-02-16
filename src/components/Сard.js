@@ -1,9 +1,9 @@
 export class Card {
   constructor(cards, userId, elementsTemplate, handleCardClick,
-    handleLikeClick, handleDeleteClick, confirmationPopup) {
+    handleLikeClick, confirmationPopup) {
     this._elementsTemplate = elementsTemplate
     this._handleCardClick = handleCardClick
-    this._handleDeleteClick = handleDeleteClick
+    // this._handleDeleteClick = handleDeleteClick
     this._handleLikeClick = handleLikeClick
     this._like = cards.likes
     this._id = cards._id
@@ -25,12 +25,10 @@ export class Card {
   };
 
   //удаление карточки
-  deleteCard = (evt) => {
-    this._handleDeleteClick(this._id).then(() => {
-      evt.target.closest(".elements__item").remove();
-    })
-  };
+  confirmDeleteCard = (evt) => {
+    this._confirmationPopup(evt, this._id)
 
+  };
 
   //Отрытие картинки попапа
   _handleClickImage = () => {
@@ -50,10 +48,8 @@ export class Card {
       this._elm.querySelector(".elements__delete").remove();
     }
     const elmLikeButton = this._elm.querySelector(".elements__heart");
-    // const confirmationSubmitButton = document.querySelector(".popup__button")
-    elmDeleteButton.addEventListener("click", () => this._confirmationPopup());
-    // confirmationSubmitButton.addEventListener("submit", this.deleteCard);
-    // elmDeleteButton.addEventListener("click", this.deleteCard);
+    // elmDeleteButton.addEventListener("click", () => this._confirmationPopup(this._id));
+    elmDeleteButton.addEventListener("click", this.confirmDeleteCard);
     elmLikeButton.addEventListener("click", this.toggleLike);
     this._elmPhoto.addEventListener("click", () => this._handleClickImage());
   }
