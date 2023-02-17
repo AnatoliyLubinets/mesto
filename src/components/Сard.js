@@ -12,6 +12,7 @@ export class Card {
     this._autor = cards.owner
     this._userId = userId
     this._confirmationPopup = confirmationPopup
+
   }
 
   //лайк карточки
@@ -20,7 +21,10 @@ export class Card {
     this._handleLikeClick(this._id, isLiked).then((res) => {
       this._like = res.likes;
       evt.target.classList.toggle("elements__heart_active");
-      this._elm.querySelector(".elements__number-of-like").textContent = this._like.length;
+      this._likeNumber.textContent = this._like.length;
+    })
+    .catch((err) => {
+      console.log(err)
     })
   };
 
@@ -47,10 +51,9 @@ export class Card {
     if (this._autor._id !== this._userId) {
       this._elm.querySelector(".elements__delete").remove();
     }
-    const elmLikeButton = this._elm.querySelector(".elements__heart");
     // elmDeleteButton.addEventListener("click", () => this._confirmationPopup(this._id));
     elmDeleteButton.addEventListener("click", this.confirmDeleteCard);
-    elmLikeButton.addEventListener("click", this.toggleLike);
+    this._likeHeart.addEventListener("click", this.toggleLike);
     this._elmPhoto.addEventListener("click", () => this._handleClickImage());
   }
 
@@ -58,14 +61,16 @@ export class Card {
   createElement() {
     const elementsTemplate = this._getTemplateElement();
     this._elm = elementsTemplate.cloneNode(true);
+    this._likeNumber = this._elm.querySelector(".elements__number-of-like")
+    this._likeHeart = this._elm.querySelector(".elements__heart");
     this._elm.querySelector(".elements__name").textContent = this._name;
     this._elmPhoto = this._elm.querySelector(".elements__photo");
     this._elmPhoto.src = this._link;
     this._elmPhoto.alt = "Фото" + " " + this._name;
-    this._elm.querySelector(".elements__number-of-like").textContent = this._like.length;
+    this._likeNumber.textContent = this._like.length;
     const isLiked = this._like.filter(item => item._id === this._userId).length > 0;
     if (isLiked) {
-      this._elm.querySelector(".elements__heart").classList.add("elements__heart_active");
+      this._likeHeart.classList.add("elements__heart_active");
     }
     this._addEventListeners();
     return this._elm;

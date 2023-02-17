@@ -11,3 +11,11 @@ export const buttonOpenEditAvatarPopup = document.querySelector(".profile__avata
 export const formEditAvatar = document.querySelector(".avatar-popup__submit-form");
 export const confirmationPopupForm = document.querySelector(".confirmation-popup__submit-form");
 export const openConfirmationPopupButtons = document.querySelector("#elements-template").content.querySelectorAll(".elements__delete");
+export const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};

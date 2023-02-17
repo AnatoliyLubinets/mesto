@@ -6,14 +6,21 @@ import { PopupWithForm } from "./../components/PopupWithForm.js";
 import { PopupWithImage } from "./../components/PopupWithImage.js";
 import { UserInfo } from './../components/UserInfo.js';
 import { Section } from './../components/Section.js';
-import { Api } from './../components/api.js';
+import { Api } from '../components/Api.js';
 import { PopupWithConfirmation } from './../components/PopupWithConfirmation.js'
+import { validationConfig } from './../utils/constants.js'
 import { elementsTemplate, buttonOpenEditAvatarPopup,
   formEditProfile, formAddCard, buttonOpenAddCardPopup,
   buttonOpenEditProfilePopup, formEditAvatar,
 } from './../utils/constants.js';
 
-const api = new Api()
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-59",
+  headers: {
+    authorization: "af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9",
+    "Content-Type": "application/json",
+  },
+});
 
  Promise.all([api.getInitialCards(), api.getProfileInfo()])
   .then(([cards, user]) => {
@@ -25,15 +32,6 @@ const api = new Api()
   .catch((err) =>  {
     console.log(err)
   })
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
 
 //Обьявление экземпляров валидации
 const addCardFormValidator = new FormValidator(validationConfig, formAddCard)
@@ -56,7 +54,7 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__avatar'
 });
 
-const togglelikeCard = (_id, isDelete) => {
+const toggleLikeCard = (_id, isDelete) => {
   if(isDelete) {
     return api.handleDeleteLikeClick(_id);
   }
@@ -68,7 +66,7 @@ const createCard = (item) => {
   const cardElement = new Card(
       item, userProfile._id, elementsTemplate,
      (src, link) => {popupWithImage.open(src, link)},
-     (_id, isDelete) => togglelikeCard(_id, isDelete),
+     (_id, isDelete) => toggleLikeCard(_id, isDelete),
     //  (_id) => api.handleDeleteCard(_id),
      (evt, _id) => {confirmationPopup.open(evt, _id)},
     )

@@ -1,102 +1,86 @@
-import { addLink } from "../utils/constants"
 
-export class Api {
+  export class Api {
+  constructor(options) {
+    this._options = options;
+    this._baseUrl = this._options.baseUrl;
+    this._headers = this._options.headers;
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse)
+  }
 
   getInitialCards = () => {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9'
-      },
-    })
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .catch(err => {
-      console.log(err)
+    return this._request(`${this._baseUrl}/cards`, {
+      headers: this._headers,
     })
   }
 
   getProfileInfo = () => {
-    return fetch('https://nomoreparties.co/v1/cohort-59/users/me', {
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9'
-      }
-    })
-    .then(res => res.ok ? res.json() : Promise.reject())
-  }
+    return this._request(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    });
+    }
 
   profileEdit = (values) => {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
-      method: 'PATCH',
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
-        'Content-Type': 'application/json'
-      },
+    return this._request(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+      method: "PATCH",
       body: JSON.stringify({
         name: values.name,
         about: values.info
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
   createNewCard = (values) => {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
+    return this._request(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: values.name,
         link: values.link
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
 
   handleDeleteCard = (_id) => {
-    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ _id, {
+    return this._request(`${this._baseUrl}/cards/${_id}`, {
       method: 'DELETE',
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
-      },
+      headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
   handleLikeClick = (_id) => {
-    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ _id +'/likes', {
+    return this._request(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'PUT',
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify()
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
   handleDeleteLikeClick = (_id) => {
-    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/'+ _id +'/likes', {
+    return this._request(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'DELETE',
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
-      },
+      headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
   }
 
   handleChangeAvatar = (user) => {
-    return  fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar', {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: 'af4e66a2-1aaf-46fc-b7c6-0a00a307bcb9',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
-        avatar: user.link,
+        avatar: user.link
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
   }
 }
